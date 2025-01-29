@@ -212,7 +212,6 @@ def app1(shared_directory):
             except Exception as e:
                 st.error(f"Error generating decision tree: {e}")
 
-                # Data Plotting with Specifications 
         st.subheader("Data Plotting with Specifications") 
 
         categorical_columns = data.select_dtypes(include=['object', 'category']).columns.tolist()
@@ -231,7 +230,6 @@ def app1(shared_directory):
         filtered_df = data[(data[numeric_column] >= selected_range[0]) & (data[numeric_column] <= selected_range[1])]
         grouped_data = filtered_df.groupby(user_column)[numeric_column].sum()
 
-        # Displaying the Filtered Data 
         st.write("### Filtered Data")
         st.dataframe(filtered_df)
 
