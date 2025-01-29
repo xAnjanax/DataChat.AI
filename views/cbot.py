@@ -43,9 +43,6 @@ def ask_groq_with_context(user_query, json_data, model="llama3-8b-8192"):
     except Exception as e:
         return f"Error: {e}"
 
-shared_directory = "./shared_files"
-os.makedirs(shared_directory, exist_ok=True)
-
 def app1(shared_directory): 
 
     st.title("Dataset Chatbot")
@@ -77,14 +74,13 @@ def app1(shared_directory):
             file_path = os.path.join(shared_directory, selected_file)
 
             df = pd.read_csv(file_path, encoding='ISO-8859-1')
-            # st.success("Dataset uploaded successfully!")
 
             numeric_columns = df.select_dtypes(include=['number']).columns.tolist()
             categorical_columns = df.select_dtypes(include=['object', 'category']).columns.tolist()
             datetime_columns = df.select_dtypes(include=['datetime']).columns.tolist()
             missing_values = df.isnull().sum()
             num_rows, num_cols = df.shape
-            
+
             if len(numeric_columns) > 1:
                 correlations = df[numeric_columns].corr().to_dict()
                 correlation_text = "Correlation matrix available for numeric columns."
@@ -124,19 +120,17 @@ def app1(shared_directory):
             st.error(f"An error occurred: {e}")
     else:
         st.info("Upload a CSV file to get started.")
-        st.text("You can ask me: ")
-        st.text("- What are the most important columns in this dataset?") 
-        st.text("- Should I use a scatter plot or a line plot to show the relationship between variable 'X' and 'Y'?") 
-        st.text("- What are the key patterns or trends in this dataset?") 
 
     filename = "dataset_analysis.json"
 
     json_data = load_json_file(filename)
 
-    if "chat_history" not in st.session_state:
-        st.session_state.chat_history = []
+    if "error" not in json_data and os.listdir(shared_directory):
 
-    if "error" not in json_data and shared_directory:
+        st.text("You can ask me: ")
+        st.text("- What are the key patterns or trends in this dataset?") 
+        st.text("- Should I use a scatter plot or a line plot to show the relationship between variable 'X' and 'Y'?") 
+        st.text("- How do I create a report summarizing the results of my analysis?") 
 
         user_query = st.text_input("Enter your query about the dataset:")
 
