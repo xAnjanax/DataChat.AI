@@ -44,7 +44,7 @@ def app():
     st_lottie(
     lottie_hello1,
     height=330,
-    width=1190,
+    width=1140,
     key=None,
     )
 
