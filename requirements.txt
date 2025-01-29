@@ -2,3 +2,4 @@ streamlit-lottie
 plotly
 scikit-learn
 matplotlib
+groq
