@@ -3,4 +3,4 @@ plotly
 scikit-learn
 matplotlib
 groq
-dotenv
+python-dotenv
