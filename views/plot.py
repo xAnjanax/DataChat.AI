@@ -1,14 +1,19 @@
 import streamlit as st
 import pandas as pd
+
 import plotly.express as px
 import plotly.graph_objects as go
+
 import os
 import json
 import requests
+
 from streamlit_lottie import st_lottie
+
 import numpy as np
 from sklearn.tree import DecisionTreeRegressor, DecisionTreeClassifier, plot_tree
 from sklearn.model_selection import train_test_split
+
 import matplotlib.pyplot as plt
 
 shared_directory = "./shared_files"
@@ -206,6 +211,74 @@ def app1(shared_directory):
 
             except Exception as e:
                 st.error(f"Error generating decision tree: {e}")
+
+                # Data Plotting with Specifications 
+        st.subheader("Data Plotting with Specifications") 
+
+        categorical_columns = data.select_dtypes(include=['object', 'category']).columns.tolist()
+        user_column = st.selectbox("Select a column to group by (categorical):", categorical_columns)
+
+        numeric_columns = data.select_dtypes(include=['number']).columns.tolist()
+        numeric_column = st.selectbox("Select a numeric column to filter:", numeric_columns)
+
+        range_min = int(data[numeric_column].min())
+        range_max = int(data[numeric_column].max())
+        selected_range = st.slider(f"Set a range for {numeric_column}:", 
+                                min_value=range_min, 
+                                max_value=range_max, 
+                                value=(range_min, range_max))
+
+        filtered_df = data[(data[numeric_column] >= selected_range[0]) & (data[numeric_column] <= selected_range[1])]
+        grouped_data = filtered_df.groupby(user_column)[numeric_column].sum()
+
+        # Displaying the Filtered Data 
+        st.write("### Filtered Data")
+        st.dataframe(filtered_df)
+
+        st.write("### Plot Filtered Data")
+
+        col1_1, col2_1, col3_1, col4, col5, col6 = st.columns(6)
+
+        with col1_1:
+            bar_chart_selected = st.button("Bar Chart")
+        with col2_1:
+            line_chart_selected = st.button("Line Chart")
+        with col3_1:
+            pie_chart_selected = st.button("Pie Chart")
+        with col4:
+            scatter_plot_selected = st.button("Scatter Plot")
+        with col5:
+            histogram_selected = st.button("Histogram")
+        with col6:
+            box_plot_selected = st.button("Box Plot")
+
+        if not grouped_data.empty:
+            
+            if bar_chart_selected:
+                fig = px.bar(data, x=user_column, y=numeric_column, title=f"Bar Plot of {numeric_column} vs {user_column}")
+                st.plotly_chart(fig, use_container_width=True)
+                
+            elif line_chart_selected:
+                st.line_chart(grouped_data)
+                
+            elif pie_chart_selected:
+                fig = px.pie(data, names=user_column, title=f"Pie Chart of {user_column}")
+                st.plotly_chart(fig, use_container_width=True)
+
+            elif scatter_plot_selected: 
+                fig = px.scatter(data, x=user_column, y=numeric_column, title=f"Scatter Plot of {numeric_column} vs {user_column}")
+                st.plotly_chart(fig, use_container_width=True)
+                
+            elif histogram_selected:
+                fig = px.histogram(data, x=user_column, title=f"Histogram of {user_column}")
+                st.plotly_chart(fig, use_container_width=True)
+                
+            elif box_plot_selected:
+                fig = px.box(data, y=numeric_column, title=f"Box Plot of {numeric_column}")
+                st.plotly_chart(fig, use_container_width=True)
+
+        else:
+            st.write("No data matches the selected criteria.")
 
     else:
         st.warning("No files available in the shared directory. Please upload a file to proceed.")
