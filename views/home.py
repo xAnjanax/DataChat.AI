@@ -27,19 +27,35 @@ def app():
 
     st.text(" ")
 
-    st.header("Rough Guidelines for navigating this application: ")
-    st.text("Step 1: Upload your CSV file. A preview of the data will be provided for your reference.") 
-    st.text("You can upload more than one file, although only one file at a time. These files can be accessed in the Chatbot and Plot Pages.")
+    st.write('''### *Rough Guidelines for navigating this application:*''')
+    st.write('''#### *Step 1: Upload your CSV file on the Home Page.*''') 
+    st.write('''A preview of the data will be provided for your reference.''') 
+    st.write('''You can upload more than one file, although only one file at a time. These files can be accessed in the Chatbot and Plot Pages.''')
     
-    st.text("Step 2: Head over to the Chatbot Page. Select the file you would like to work with.") 
-    st.text("Here you can ask the chatbot about the contents of the dataset, and ask it for recommendations on how the data can be analyzed and plotted.")
+    st.write('''#### *Step 2: Head over to the Chatbot Page.*''') 
+    st.write('''Select the file you would like to work with.''') 
+    st.write('''Here you can ask the chatbot about the contents of the dataset, and ask it for recommendations on how the data can be analyzed and plotted.''')
 
-    st.text("Step 3: Head over to the Plot Page. The file you selected on the Chatbot Page will be applied here.") 
-    st.text("Utilize the interface to plot visualizations as suggested by the Chatbot. The information you generate on this page can be used for further queries.") 
-    st.text("You can ask the chatbot for more suggestions as per your needs.")
+    st.write('''#### *Step 3: Head over to the Plot Page.*''') 
+    st.write('''The file you selected on the Chatbot Page will be applied here.''') 
+    st.write('''Utilize the interface to plot visualizations as suggested by the Chatbot. The information you generate on this page can be used for further queries.''') 
+    st.write('''You can ask the chatbot for more suggestions as per your needs.''')
 
-    st.text("Happy Chatting/Plotting!")
+    st_lottie(
+    lottie_hello1,
+    height=330,
+    width=1290,
+    key=None,
+    )
 
+    text = "Happy Chatting/Plotting!"
+    st.markdown(
+        f"<h4 style='text-align: center;'>{text}</h4>",
+        unsafe_allow_html=True
+    )
+
+    # st.write('''##### Happy Chatting/Plotting!''')
+    
     st_lottie(
     lottie_hello1,
     height=350,
