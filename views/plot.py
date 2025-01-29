@@ -72,8 +72,8 @@ def app1(shared_directory):
             try:
                 file_path = os.path.join(shared_directory, selected_file)
                 os.remove(file_path)
-                # st.success(f"File '{selected_file}' deleted successfully! Reload to refresh.")
-
+                st.success(f"File '{selected_file}' deleted successfully! Reload to refresh.")
+                
                 if os.path.exists(filename):
                     with open(filename, 'w') as json_file:
                         json.dump({}, json_file) 
