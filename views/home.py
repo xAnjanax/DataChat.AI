@@ -55,12 +55,5 @@ def app():
     )
 
     # st.write('''##### Happy Chatting/Plotting!''')
-    
-    st_lottie(
-    lottie_hello1,
-    height=350,
-    width=None,
-    key=None,
-    )
 
     st.header("Upload a file to get started.")
