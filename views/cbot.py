@@ -136,7 +136,7 @@ def app1(shared_directory):
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = []
 
-    if "error" not in json_data:
+    if "error" not in json_data and if selected_file:
 
         user_query = st.text_input("Enter your query about the dataset:")
 
