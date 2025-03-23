@@ -7,3 +7,5 @@ This project aims to develop a recommendation-based chatbot that assists data an
 Users can upload CSV files (datasets), communicate with the chatbot and ask questions ranging from "How many rows and columns are in the dataset?" to "Should I use a scatter plot or a line plot to show the relationship between variable 'X' and 'Y'?", and more. Users can then head over to the plot page, and with the help of the suggestions and guidance provided by the chatbot, they can bring their visualizations to life. 
 
 This project provides an interface that uses conversational AI, offers context-sensitive, on-demand suggestions tailored to the dataset being analyzed. It supports decision-making by suggesting next steps, statistical methods, or visualizations while allowing the analyst to retain full control over the analysis process. 
+
+Link to Project: https://datachatai-tm5vvwf8yvzjjwcztjdf6e.streamlit.app/?embed_options=dark_theme 
